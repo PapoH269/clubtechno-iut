@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\Project;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -15,12 +15,6 @@ class PageController extends Controller
     public function about()
     {
         return view('about');
-    }
-
-    public function projects()
-    {
-        $projects = Project::all();
-        return view('projects', compact('projects'));
     }
 
     public function events()
@@ -38,9 +32,20 @@ class PageController extends Controller
     {
         return view('dashboard');
     }
-    public function register()
+
+    public function updateProfile(Request $request)
     {
-        // Ton code ici, par exemple :
-        return view('register');
+        $request->validate([
+            'pseudo' => 'nullable|string|max:50',
+            'niveau' => 'nullable|string|max:50',
+            'departement' => 'nullable|string|max:100',
+        ]);
+        $user = auth()->user();
+        $user->pseudo = $request->pseudo;
+        $user->niveau = $request->niveau;
+        $user->departement = $request->departement;
+        $user->save();
+
+        return redirect()->route('dashboard')->with('success', 'Profil mis à jour !');
     }
 }

@@ -29,9 +29,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // Add logic to save a new project
-        Project::create($request->all());
-        return redirect()->route('projects.index');
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+        Project::create($validated);
+        return redirect()->route('projects.index')->with('success', 'Projet créé avec succès.');
     }
 
     /**
@@ -55,8 +58,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $project->update($request->all());
-        return redirect()->route('projects.index');
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+        $project->update($validated);
+        return redirect()->route('projects.index')->with('success', 'Projet modifié avec succès.');
     }
 
     /**
@@ -65,6 +72,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('success', 'Projet supprimé avec succès.');
     }
 }

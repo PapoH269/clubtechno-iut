@@ -6,6 +6,5 @@
         @guest
             <a href="{{ route('register') }}" class="bg-[#006633] text-white px-8 py-3 rounded-lg hover:bg-green-800 transition-colors">S’inscrire maintenant</a>
         @endguest
-        <a href="{{ route('projects') }}" class="mt-4 inline-block text-[#003087] hover:underline">Projets publics</a>
     </div>
 @endsection

@@ -10,29 +10,44 @@
     <!-- Header -->
     <header class="bg-[#003087] text-white p-4 flex items-center justify-between shadow-md">
         <div class="flex items-center">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-16 mr-4">
-            <h1 class="text-xl font-bold">Club Technologie Innovation & IA</h1>
+            <div class="bg-white rounded-full shadow-lg p-1 transition-transform duration-300 hover:scale-110 hover:shadow-2xl">
+                <img src="{{ asset('images/CTI&IA.png') }}" alt="Logo CTI&IA"
+                     class="h-16 w-16 object-contain rounded-full"/>
+            </div>
+            <h1 class="ml-4 text-2xl font-extrabold tracking-wide text-yellow-300 drop-shadow-lg animate-pulse">
+                Club Technologie Innovation & IA
+            </h1>
         </div>
-        <nav>
-            <ul class="flex space-x-4">
-                <li><a href="{{ route('welcome') }}" class="hover:text-[#006633] transition-colors">Accueil</a></li>
-                <li><a href="{{ route('about') }}" class="hover:text-[#006633] transition-colors">À propos</a></li>
-                <li><a href="{{ route('projects') }}" class="hover:text-[#006633] transition-colors">Projets</a></li>
-                <li><a href="{{ route('events') }}" class="hover:text-[#006633] transition-colors">Événements</a></li>
-                @auth
-                    <li><a href="{{ route('dashboard') }}" class="hover:text-[#006633] transition-colors">Tableau de bord</a></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="hover:text-[#006633] transition-colors">Déconnexion</button>
-                        </form>
-                    </li>
-                @else
-                    <li><a href="{{ route('login') }}" class="hover:text-[#006633] transition-colors">Connexion</a></li>
-                    <li><a href="{{ route('register') }}" class="hover:text-[#006633] transition-colors">Inscription</a></li>
-                @endauth
-            </ul>
-        </nav>
+<nav>
+    <ul class="flex space-x-4">
+        {{-- Liens toujours visibles sauf sur dashboard --}}
+        @if(Route::currentRouteName() !== 'dashboard')
+            <li><a href="{{ route('welcome') }}" class="hover:text-[#006633] transition-colors">Accueil</a></li>
+        @endif
+        <li><a href="{{ route('about') }}" class="hover:text-[#006633] transition-colors">À propos</a></li>
+        <li><a href="{{ route('contact') }}" class="hover:text-[#006633] transition-colors">Contact</a></li>
+        <li><a href="#" class="hover:text-[#006633] transition-colors">Règles</a></li>
+        
+        @auth
+            {{-- Liens réservés aux membres, sauf sur welcome --}}
+            @if(Route::currentRouteName() !== 'welcome')
+                <li><a href="{{ route('projects.index') }}" class="hover:text-[#006633] transition-colors">Projets</a></li>
+                <li><a href="{{ route('events.index') }}" class="hover:text-[#006633] transition-colors">Événements</a></li>
+                <li><a href="{{ route('dashboard') }}" class="hover:text-[#006633] transition-colors">Mon profil</a></li>
+                <li><a href="#" class="hover:text-[#006633] transition-colors">Membres du club (chat à venir)</a></li>
+            @endif
+            <li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="hover:text-[#006633] transition-colors">Déconnexion</button>
+                </form>
+            </li>
+        @else
+            <li><a href="{{ route('login') }}" class="hover:text-[#006633] transition-colors">Connexion</a></li>
+            <li><a href="{{ route('register') }}" class="hover:text-[#006633] transition-colors">Inscription</a></li>
+        @endauth
+    </ul>
+</nav>
     </header>
 
     <!-- Main content -->

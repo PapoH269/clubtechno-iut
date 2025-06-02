@@ -21,5 +21,10 @@
                 </div>
             @endforeach
         </div>
+        <div class="mt-6 text-center">
+            <a href="{{ route('projects.create') }}" class="inline-block bg-[#003087] text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-[#002663] transition-colors">
+                Créer un projet
+            </a>
+        </div>
     </div>
 @endsection

@@ -5,12 +5,7 @@
     <h1>Créer un projet</h1>
     <form action="{{ route('projects.store') }}" method="POST">
         @csrf
-        <label>Titre :</label>
-        <input type="text" name="title" required>
-        <br>
-        <label>Description :</label>
-        <textarea name="description"></textarea>
-        <br>
-        <button type="submit">Enregistrer</button>
+        <!-- champs -->
+        <button type="submit">Créer</button>
     </form>
 @endsection
