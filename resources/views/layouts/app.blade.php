@@ -20,32 +20,25 @@
         </div>
 <nav>
     <ul class="flex space-x-4">
-        {{-- Liens toujours visibles sauf sur dashboard --}}
-        @if(Route::currentRouteName() !== 'dashboard')
+        @guest
             <li><a href="{{ route('welcome') }}" class="hover:text-[#006633] transition-colors">Accueil</a></li>
-        @endif
-        <li><a href="{{ route('about') }}" class="hover:text-[#006633] transition-colors">À propos</a></li>
-        <li><a href="{{ route('contact') }}" class="hover:text-[#006633] transition-colors">Contact</a></li>
-        <li><a href="#" class="hover:text-[#006633] transition-colors">Règles</a></li>
-        
-        @auth
-            {{-- Liens réservés aux membres, sauf sur welcome --}}
-            @if(Route::currentRouteName() !== 'welcome')
-                <li><a href="{{ route('projects.index') }}" class="hover:text-[#006633] transition-colors">Projets</a></li>
-                <li><a href="{{ route('events.index') }}" class="hover:text-[#006633] transition-colors">Événements</a></li>
-                <li><a href="{{ route('dashboard') }}" class="hover:text-[#006633] transition-colors">Mon profil</a></li>
-                <li><a href="#" class="hover:text-[#006633] transition-colors">Membres du club (chat à venir)</a></li>
-            @endif
+            <li><a href="{{ route('about') }}" class="hover:text-[#006633] transition-colors">À propos</a></li>
+            <li><a href="{{ route('contact') }}" class="hover:text-[#006633] transition-colors">Contact</a></li>
+            <li><a href="#" class="hover:text-[#006633] transition-colors">Règles</a></li>
+            <li><a href="{{ route('login') }}" class="hover:text-[#006633] transition-colors">Connexion</a></li>
+            <li><a href="{{ route('register') }}" class="hover:text-[#006633] transition-colors">Inscription</a></li>
+        @else
+            <li><a href="{{ route('projects.index') }}" class="hover:text-[#006633] transition-colors">Projets</a></li>
+            <li><a href="{{ route('events.index') }}" class="hover:text-[#006633] transition-colors">Événements</a></li>
+            <li><a href="{{ route('profile.edit') }}" class="hover:text-[#006633] transition-colors">Mon profil</a></li>
+            <li><a href="#" class="hover:text-[#006633] transition-colors">Membres du club (chat à venir)</a></li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="hover:text-[#006633] transition-colors">Déconnexion</button>
                 </form>
             </li>
-        @else
-            <li><a href="{{ route('login') }}" class="hover:text-[#006633] transition-colors">Connexion</a></li>
-            <li><a href="{{ route('register') }}" class="hover:text-[#006633] transition-colors">Inscription</a></li>
-        @endauth
+        @endguest
     </ul>
 </nav>
     </header>
