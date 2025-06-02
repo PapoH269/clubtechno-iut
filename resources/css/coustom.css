@@ -1,0 +1,24 @@
+/* resources/css/custom.css */
+.iut-card {
+    border-left: 4px solid #006633;
+    background-color: #f9fafb;
+}
+
+.iut-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.iut-button {
+    transition: all 0.3s ease;
+}
+
+.iut-button:hover {
+    filter: brightness(90%);
+}
+
+@media (max-width: 640px) {
+    .iut-nav ul {
+        flex-direction: column;
+    }
+}
